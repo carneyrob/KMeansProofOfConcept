@@ -1,5 +1,6 @@
 import scipy.io as sp
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 data = sp.loadmat('kmeans_test_data.mat')['X']
@@ -49,11 +50,19 @@ def computeCentroids(X, idx,K):
         centroids[i,:] = res / count
     return centroids
 
-x = np.array([1, 2, 4])
-y = np.array([2, 4, 1])
-x[2] = 1
 
-idx = findClosestCentroids(data, initial_centroids)
-centroids = computeCentroids(data, idx, 3)
+(idx,centroids) = runKMeans(data, initial_centroids, 12)
 
+colors = idx.tolist()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+scatter = ax.scatter(data[:,0], data[:,1], c=colors, s=6)
+for i,j in centroids:
+    ax.scatter(i, j, s=10, c='red', marker='+')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+
+
+fig.savefig('myfig.png')
 

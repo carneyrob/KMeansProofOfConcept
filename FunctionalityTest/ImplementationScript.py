@@ -53,6 +53,10 @@ def computeCentroids(X, idx,K):
 
 (idx,centroids) = runKMeans(data, initial_centroids, 12)
 
+
+
+# View k-means with matplotlib
+
 colors = idx.tolist()
 
 fig = plt.figure()

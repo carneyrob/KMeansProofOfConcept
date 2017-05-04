@@ -53,7 +53,7 @@ def computeCentroids(X, idx,K):
             count[0,p] = countInt
         for j in range(0,m):
             if (idx[j,0]==i):
-                res = np.add(res, data[j,:])
+                res = np.add(res, X[j,:])
         centroids[i,:] = res / count
     return centroids
 

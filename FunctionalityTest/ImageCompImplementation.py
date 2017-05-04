@@ -59,6 +59,10 @@ def computeCentroids(X, idx,K):
 
 
 
+test_img = load_image('../bird_uncompressed')
+
+test_img_norm = test_img / 255
+
 
 
 

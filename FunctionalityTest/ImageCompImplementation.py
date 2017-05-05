@@ -59,12 +59,17 @@ def computeCentroids(X, idx,K):
 
 
 
-test_img = load_image('../bird_uncompressed')
 
 
+def img_reshape(img):
+    shape = img.shape;
+    return np.reshape(img, (shape[0]*shape[1], shape[2]))
+
+print(img_reshape(np.ones((3, 3, 2))))
 
 
-
+test_img = img_reshape(load_image('../bird_uncompressed.png'))
+print(test_img.shape)
 
 
 

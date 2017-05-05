@@ -65,13 +65,13 @@ def img_reshape(img):
     shape = img.shape;
     return np.reshape(img, (shape[0]*shape[1], shape[2]))
 
+# TEST REGION
 test = np.ones((3, 3, 2))
 test[1, 1, 1] = 0
 test[2, 2, 0] = 2
 test[2, 1, 1] = 8
 test[0, 1, 1] = 3
-#test reshape here
-
+#END REGION
 
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
 print(test_img.shape)

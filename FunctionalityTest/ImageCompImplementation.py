@@ -70,7 +70,7 @@ test[1, 1, 1] = 0
 test[2, 2, 0] = 2
 test[2, 1, 1] = 8
 test[0, 1, 1] = 3
-#test reshape here
+##test reshape here
 
 
 test_img = img_reshape(load_image('../bird_uncompressed.png'))

@@ -78,7 +78,10 @@ test[0, 1, 1] = 3
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
 print(test_img.shape)
 
-init_centroids = randomCentInit(test_img.shape[0], 20, 0, 255)
+init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
+print(init_centroids.shape)
+(idx, colors) = runKMeans(test_img, init_centroids, 25)
+print(idx.shape)
 
 
 

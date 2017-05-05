@@ -58,23 +58,22 @@ def computeCentroids(X, idx,K):
     return centroids
 
 
-
-
-
 def img_reshape(img):
     shape = img.shape;
     return np.reshape(img, (shape[0]*shape[1], shape[2]))
 
-print(img_reshape(np.ones((3, 3, 2))))
+test = np.ones((3, 3, 2))
+test[1, 1, 1] = 0
+test[2, 2, 0] = 2
+test[2, 1, 1] = 8
+test[0, 1, 1] = 3
+#print(test)
+#print("\n")
+#print(img_reshape(test))
 
 
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
 print(test_img.shape)
-
-
-
-
-
 
 
 

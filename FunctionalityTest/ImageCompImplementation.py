@@ -6,7 +6,7 @@ def load_image( infilename ) :
     img = Image.open( infilename )
     img.load()
     data = np.asarray( img, dtype="int32" )
-    return data
+    return data.astype(np.float32) / 255
 
 # For saving NP arrays as images (given a file location)
 def save_image( npdata, outfilename ) :
@@ -60,8 +60,6 @@ def computeCentroids(X, idx,K):
 
 
 test_img = load_image('../bird_uncompressed')
-
-test_img_norm = test_img / 255
 
 
 

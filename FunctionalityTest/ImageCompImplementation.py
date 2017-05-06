@@ -1,5 +1,6 @@
 import numpy as np
 from PIL import Image
+import random as rd
 
 # For loading images as NP arrays
 def load_image( infilename ) :
@@ -57,22 +58,33 @@ def computeCentroids(X, idx,K):
         centroids[i,:] = res / count
     return centroids
 
+def randomCentInit(dim, numCent, low=0, high=100):
+    return np.random.randint(low, high, (numCent, dim)).astype(np.float32)
 
+def img_reshape(img):
+    shape = img.shape;
+    return np.reshape(img, (shape[0]*shape[1], shape[2]))
 
 test_img = load_image('../bird_uncompressed')
 
 img_shape = test_img.shape;
 
+# TEST REGION
+test = np.ones((3, 3, 2))
+test[1, 1, 1] = 0
+test[2, 2, 0] = 2
+test[2, 1, 1] = 8
+test[0, 1, 1] = 3
+#END REGION
 
 
+test_img = img_reshape(load_image('../bird_uncompressed.png'))
+print(test_img.shape)
 
-
-
-
-
-
-
-
+init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
+print(init_centroids.shape)
+(idx, colors) = runKMeans(test_img, init_centroids, 25)
+print(idx.shape)
 
 
 

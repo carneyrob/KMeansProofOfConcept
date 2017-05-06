@@ -5,3 +5,4 @@ This is a simple proof of concept for k-means clustering implemented in Python. 
 
 IMAGE COMPRESSION:
 It is possible to use this to compress images by limiting to a certain numer of colors ("clusters" here). Implementation details TBD.
+

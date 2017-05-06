@@ -61,6 +61,7 @@ def computeCentroids(X, idx,K):
 
 test_img = load_image('../bird_uncompressed')
 
+img_shape = test_img.shape;
 
 
 

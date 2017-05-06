@@ -91,11 +91,25 @@ test[0, 1, 1] = 3
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
 print(test_img.shape)
 
-init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
-print(init_centroids.shape)
-(idx, colors) = runKMeans(test_img, init_centroids, 25)
+#init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
+#print(init_centroids.shape)
+#(idx, colors) = runKMeans(test_img, init_centroids, 25)
 #print(idx.shape)
 
+#idx = findClosestCentroids(test_img, colors)
+
+test_idx = np.ones((10,1))
+test_idx[1] = 0
+test_idx[4] = 2
+
+test_cent = np.ones((3, 2))
+test_cent[1,:] = [2, 2]
+test_cent[2,:] = [3, 3]
+
+test_res = test_cent[test_idx, :]
+print(test_res)
+
+print(test_cent)
 
 
 

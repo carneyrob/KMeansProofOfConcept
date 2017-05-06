@@ -1,7 +1,10 @@
 import numpy as np
 from PIL import Image
 import random as rd
+import warnings
 
+
+np.seterr(all='warn')
 # For loading images as NP arrays
 def load_image( infilename ) :
     img = Image.open( infilename )
@@ -51,9 +54,9 @@ def computeCentroids(X, idx,K):
         count = np.zeros((1,n))
         res = np.zeros((1, n))
         for p in range(0,n):
-            count[0,p] = countInt
+                count[0,p] = countInt
         for j in range(0,m):
-            if (idx[j,0]==i):
+           if (idx[j,0]==i):
                 res = np.add(res, X[j,:])
         centroids[i,:] = res / count
     return centroids
@@ -62,10 +65,17 @@ def randomCentInit(dim, numCent, low=0, high=100):
     return np.random.randint(low, high, (numCent, dim)).astype(np.float32)
 
 def img_reshape(img):
-    shape = img.shape;
-    return np.reshape(img, (shape[0]*shape[1], shape[2]))
+    try:
+        shape = img.shape
+        return np.reshape(img, (shape[0]*shape[1], shape[2]))
+    except IndexError:
+        print("Cannot reshape array ith shape: {0}".format(img.shape))
+    except Exception as err:
+        print("Unexpected error")
 
-test_img = load_image('../bird_uncompressed')
+
+
+test_img = load_image('../bird_uncompressed.png')
 
 img_shape = test_img.shape;
 
@@ -84,9 +94,13 @@ print(test_img.shape)
 init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
 print(init_centroids.shape)
 (idx, colors) = runKMeans(test_img, init_centroids, 25)
-print(idx.shape)
+#print(idx.shape)
 
 
 
 
+#print(np.isfinite(test_img).all())
+#print(np.isfinite(init_centroids).all())
+
+#print(test_img[1:20][1:20][1:20])
 

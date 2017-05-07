@@ -1,0 +1,1 @@
+from FunctionalityTest.imageCompressor import ImageCompressor

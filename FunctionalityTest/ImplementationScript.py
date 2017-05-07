@@ -1,7 +1,14 @@
 import scipy.io as sp
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
+
+PYSOLR_PATH = '/Users/robertcarney/PythonWorkspace/KMeansProofOfConcept/FunctionalityTest'
+
+if not PYSOLR_PATH in sys.path:
+    sys.path.append(PYSOLR_PATH)
+print(sys.path)
 
 data = sp.loadmat('kmeans_test_data.mat')['X']
 
@@ -50,6 +57,7 @@ def computeCentroids(X, idx,K):
         centroids[i,:] = res / count
     return centroids
 
+#kmInstance = KMeans()
 
 (idx,centroids) = runKMeans(data, initial_centroids, 12)
 

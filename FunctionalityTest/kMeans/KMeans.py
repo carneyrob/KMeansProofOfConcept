@@ -38,8 +38,10 @@ class KMeans:
             centroids[i, :] = res / count
         return centroids
 
-    def runKMeans(self, iters):
-        centroids = self.randomCentroidInit(20)
+    def runKMeans(self, iters, numOfCentroids):
+        centroids = self.randomCentroidInit(numOfCentroids)
+        print("Class impl:")
+        print(centroids)
         (m, n) = self.data.shape
         (K, l) = centroids.shape
         idx = np.zeros((m, 1))

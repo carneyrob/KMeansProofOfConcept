@@ -54,9 +54,11 @@ def computeCentroids(X, idx,K):
 
 
 #(idx,centroids) = runKMeans(data, initial_centroids, 12)
+print("Script impl:")
+print(initial_centroids)
 
 kmInstance = km.KMeans(data)
-(idx,centroids) = kmInstance.runKMeans(20)
+(idx,centroids) = kmInstance.runKMeans(20,3)
 
 
 # View k-means with matplotlib

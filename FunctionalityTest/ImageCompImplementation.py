@@ -67,8 +67,6 @@ def computeCentroids(X, idx, K):
             centroids[i,:] = getRandomCentroid(X)
         else:
             centroids[i,:] = res / count
-    print("Count 1: {0}".format(count1))
-    print("Count 2: {0}".format(count2))
     return centroids
 
 def getRandomCentroid(X):
@@ -103,16 +101,14 @@ test[0, 1, 1] = 3
 
 
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
-print(test_img.shape)
+#print(test_img.shape)
 
 init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
-print(init_centroids)
-print(test_img[1:20])
-(idx, colors) = runKMeans(test_img, init_centroids, 25)
+#(idx, colors) = runKMeans(test_img, init_centroids, 25)
 #print(idx.shape)
 
 #idx = findClosestCentroids(test_img, colors)
-
+#print(idx[1:20])
 
 #img_rec = colors[idx.tolist()]
 
@@ -129,6 +125,8 @@ test_idx1 = [1, 2, 0]
 test_res = test_cent[[1,2,0,1,1,1,0,2,1,2]]
 #print(test_res)
 
+test_tran = np.transpose([[1],[2],[3],[4]])
+print(test_tran[0])
 
 
 

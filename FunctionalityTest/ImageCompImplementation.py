@@ -10,7 +10,7 @@ def load_image( infilename ) :
     img = Image.open( infilename )
     img.load()
     data = np.asarray( img, dtype="int32" )
-    return data.astype(np.float32) / 255
+    return data.astype(np.float32)
 
 # For saving NP arrays as images (given a file location)
 def save_image( npdata, outfilename ) :
@@ -26,7 +26,7 @@ def runKMeans(X, centroids, iters):
     for i in range(0,iters):
         idx = findClosestCentroids(X,centroids)
         centroids = computeCentroids(X,idx,K)
-    return (idx,centroids);
+    return (idx,centroids)
 
 def findClosestCentroids(X, centroids):
     (k,d) = centroids.shape
@@ -46,7 +46,7 @@ def findClosestCentroids(X, centroids):
         idx[i,0] = best
     return idx
 
-def computeCentroids(X, idx,K):
+def computeCentroids(X, idx, K):
     (m,n) = X.shape
     centroids = np.zeros((K,n))
     for i in range(0,K):
@@ -59,6 +59,10 @@ def computeCentroids(X, idx,K):
            if (idx[j,0]==i):
                 res = np.add(res, X[j,:])
         centroids[i,:] = res / count
+        if (np.isnan(centroids[i,:]).any()):
+            print(res)
+            print(countInt)
+            print(i)
     return centroids
 
 def randomCentInit(dim, numCent, low=0, high=100):
@@ -91,12 +95,16 @@ test[0, 1, 1] = 3
 test_img = img_reshape(load_image('../bird_uncompressed.png'))
 print(test_img.shape)
 
-#init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
-#print(init_centroids.shape)
-#(idx, colors) = runKMeans(test_img, init_centroids, 25)
-#print(idx.shape)
+init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
+print(init_centroids)
+print(test_img[1:20])
+(idx, colors) = runKMeans(test_img, init_centroids, 25)
+print(idx.shape)
 
-#idx = findClosestCentroids(test_img, colors)
+idx = findClosestCentroids(test_img, colors)
+
+
+#img_rec = colors[idx.tolist()]
 
 test_idx = np.ones((10,1))
 test_idx[1] = 0
@@ -106,10 +114,12 @@ test_cent = np.ones((3, 2))
 test_cent[1,:] = [2, 2]
 test_cent[2,:] = [3, 3]
 
-test_res = test_cent[test_idx, :]
-print(test_res)
+test_idx1 = [1, 2, 0]
 
-print(test_cent)
+test_res = test_cent[[1,2,0,1,1,1,0,2,1,2]]
+#print(test_res)
+
+
 
 
 

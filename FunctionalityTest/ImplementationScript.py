@@ -70,3 +70,5 @@ ax.set_ylabel('y')
 
 fig.savefig('myfig.png')
 
+arr = np.array('string')
+print(arr.shape)

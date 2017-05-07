@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image
 import random as rd
 import warnings
+import time as tm
 
 
 np.seterr(all='warn')
@@ -49,21 +50,30 @@ def findClosestCentroids(X, centroids):
 def computeCentroids(X, idx, K):
     (m,n) = X.shape
     centroids = np.zeros((K,n))
+    count1 = 0
+    count2 = 0
     for i in range(0,K):
+        count1 += 1
         countInt = (idx == i).sum().astype(int)
         count = np.zeros((1,n))
         res = np.zeros((1, n))
         for p in range(0,n):
-                count[0,p] = countInt
+            count[0,p] = countInt
         for j in range(0,m):
            if (idx[j,0]==i):
                 res = np.add(res, X[j,:])
-        centroids[i,:] = res / count
-        if (np.isnan(centroids[i,:]).any()):
-            print(res)
-            print(countInt)
-            print(i)
+        if countInt == 0:
+            count2 += 1
+            centroids[i,:] = getRandomCentroid(X)
+        else:
+            centroids[i,:] = res / count
+    print("Count 1: {0}".format(count1))
+    print("Count 2: {0}".format(count2))
     return centroids
+
+def getRandomCentroid(X):
+    ind = rd.randint(0,X.shape[0])
+    return X[ind,:]
 
 def randomCentInit(dim, numCent, low=0, high=100):
     return np.random.randint(low, high, (numCent, dim)).astype(np.float32)
@@ -99,9 +109,9 @@ init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
 print(init_centroids)
 print(test_img[1:20])
 (idx, colors) = runKMeans(test_img, init_centroids, 25)
-print(idx.shape)
+#print(idx.shape)
 
-idx = findClosestCentroids(test_img, colors)
+#idx = findClosestCentroids(test_img, colors)
 
 
 #img_rec = colors[idx.tolist()]

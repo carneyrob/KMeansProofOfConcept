@@ -7,3 +7,4 @@ class ImageCompressor:
         img = Image.open(path)
         img.load()
         self.image_as_array = np.asarray( img, dtype="float32" )
+

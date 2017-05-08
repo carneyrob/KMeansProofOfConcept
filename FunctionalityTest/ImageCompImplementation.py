@@ -99,8 +99,9 @@ test[2, 1, 1] = 8
 test[0, 1, 1] = 3
 #END REGION
 
+init_img = load_image('../test_img.png')
 
-test_img = img_reshape(load_image('../bird_uncompressed.png'))
+test_img = img_reshape(init_img)
 #print(test_img.shape)
 
 init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
@@ -112,6 +113,9 @@ idx = findClosestCentroids(test_img, colors)
 
 indTran = np.transpose(idx)[0].astype(int)
 img_rec = colors[indTran]
+img_shaped = np.reshape(img_rec, init_img.shape).astype(np.uint8)
+img_res = Image.fromarray(img_shaped)
+img_res.save('compressed_img.png',"PNG")
 
 test_idx = np.ones((10,1))
 test_idx[1] = 0
@@ -127,7 +131,7 @@ test_res = test_cent[[1,2,0,1,1,1,0,2,1,2]]
 #print(test_res)
 
 test_tran = np.transpose([[1],[2],[3],[4]])
-print(test_tran[0])
+#print(test_tran[0])
 
 
 

@@ -62,6 +62,10 @@ kmInstance = km.KMeans(data)
 # View k-means with matplotlib
 
 colors = idx.tolist()
+colors2 = np.transpose(idx)
+print(idx[1:10])
+print(colors[1:10])
+print(colors2[0][1:10])
 
 fig = plt.figure()
 ax = fig.add_subplot(111)

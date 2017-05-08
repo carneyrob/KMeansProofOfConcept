@@ -25,8 +25,11 @@ def runKMeans(X, centroids, iters):
     (K,l) = centroids.shape
     idx = np.zeros((m,1))
     for i in range(0,iters):
+        t0 = tm.time()
         idx = findClosestCentroids(X,centroids)
         centroids = computeCentroids(X,idx,K)
+        t1 = tm.time() - t0
+        print("Time {0}: {1}".format(i,t1))
     return (idx,centroids)
 
 def findClosestCentroids(X, centroids):
@@ -85,31 +88,13 @@ def img_reshape(img):
     except Exception as err:
         print("Unexpected error")
 
-
-
-test_img = load_image('../bird_uncompressed.png')
-
-img_shape = test_img.shape;
-
-# TEST REGION
-test = np.ones((3, 3, 2))
-test[1, 1, 1] = 0
-test[2, 2, 0] = 2
-test[2, 1, 1] = 8
-test[0, 1, 1] = 3
-#END REGION
-
-init_img = load_image('../test_img.png')
+init_img = load_image('../bird_uncompressed.png')
 
 test_img = img_reshape(init_img)
-#print(test_img.shape)
 
-init_centroids = randomCentInit(test_img.shape[1], 20, 0, 255)
+init_centroids = randomCentInit(test_img.shape[1], 150, 0, 255)
 (idx, colors) = runKMeans(test_img, init_centroids, 25)
-#print(idx.shape)
-
 idx = findClosestCentroids(test_img, colors)
-#print(idx[1:20])
 
 indTran = np.transpose(idx)[0].astype(int)
 img_rec = colors[indTran]
@@ -117,27 +102,9 @@ img_shaped = np.reshape(img_rec, init_img.shape).astype(np.uint8)
 img_res = Image.fromarray(img_shaped)
 img_res.save('compressed_img.png',"PNG")
 
-test_idx = np.ones((10,1))
-test_idx[1] = 0
-test_idx[4] = 2
-
-test_cent = np.ones((3, 2))
-test_cent[1,:] = [2, 2]
-test_cent[2,:] = [3, 3]
-
-test_idx1 = [1, 2, 0]
-
-test_res = test_cent[[1,2,0,1,1,1,0,2,1,2]]
-#print(test_res)
-
-test_tran = np.transpose([[1],[2],[3],[4]])
-#print(test_tran[0])
 
 
 
 
-#print(np.isfinite(test_img).all())
-#print(np.isfinite(init_centroids).all())
 
-#print(test_img[1:20][1:20][1:20])
 

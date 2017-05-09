@@ -9,3 +9,7 @@ UPDATES:
  - 5/6 Refactoring to a better structure using OOP
  - 5/9 Right now this works fairly well in terms of both quality and compression, but the speed is completely impractical
 
+IDEAS:
+ - 5/9 Multithreading on index assignment to speed up performance
+
+

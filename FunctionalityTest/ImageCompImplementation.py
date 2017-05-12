@@ -5,7 +5,7 @@ import warnings
 import time as tm
 
 
-np.seterr(all='warn')
+print('Running')
 # For loading images as NP arrays
 def load_image( infilename ) :
     img = Image.open( infilename )

@@ -12,6 +12,6 @@ UPDATES:
 IDEAS:
  - 5/9 Multithreading on index assignment to speed up performance
 
-Multithreading POC script included, still very much in progress
+Multithreading POC script included, still in progress
 
 

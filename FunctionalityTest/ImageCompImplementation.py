@@ -21,16 +21,33 @@ def save_image( npdata, outfilename ) :
 #  Base K-Means Functionality
 #
 def runKMeans(X, centroids, iters):
+    vFunc = np.vectorize(findClosestCentroid, excluded=['centroids'])
     (m,n) = X.shape
     (K,l) = centroids.shape
     idx = np.zeros((m,1))
     for i in range(0,iters):
         t0 = tm.time()
-        idx = findClosestCentroids(X,centroids)
+        idx = vFunc(X,centroids=centroids)
+        print("Time 1 {0}: {1}".format(i, tm.time() - t0))
         centroids = computeCentroids(X,idx,K)
         t1 = tm.time() - t0
-        print("Time {0}: {1}".format(i,t1))
+        print("Time 2 {0}: {1}".format(i,t1))
     return (idx,centroids)
+
+def findClosestCentroid(row, centroids):
+    (k, d) = centroids.shape
+    min = 100000000;
+    best = 1
+    for i in range(0,k):
+        p = centroids[i,:]
+        sub = np.subtract(p,row)
+        result = sub.dot(sub)
+        if (result < min):
+            best = 1
+            min = result
+    return best
+
+
 
 def findClosestCentroids(X, centroids):
     (k,d) = centroids.shape
@@ -96,11 +113,11 @@ init_centroids = randomCentInit(test_img.shape[1], 150, 0, 255)
 (idx, colors) = runKMeans(test_img, init_centroids, 25)
 idx = findClosestCentroids(test_img, colors)
 
-indTran = np.transpose(idx)[0].astype(int)
-img_rec = colors[indTran]
-img_shaped = np.reshape(img_rec, init_img.shape).astype(np.uint8)
-img_res = Image.fromarray(img_shaped)
-img_res.save('compressed_img.png',"PNG")
+#indTran = np.transpose(idx)[0].astype(int)
+#img_rec = colors[indTran]
+#img_shaped = np.reshape(img_rec, init_img.shape).astype(np.uint8)
+#img_res = Image.fromarray(img_shaped)
+#img_res.save('compressed_img.png',"PNG")
 
 
 

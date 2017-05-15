@@ -5,19 +5,21 @@ import sys
 import FunctionalityTest.kMeans as km
 
 
+
 data = sp.loadmat('kmeans_test_data.mat')['X']
 
 
 initial_centroids = np.asarray([[3,3],[6,2],[8,5]])
 
 def runKMeans(X, centroids, iters):
+    vFunc = np.vectorize(findClosestCentroids)
     (m,n) = X.shape
     (K,l) = centroids.shape
     idx = np.zeros((m,1))
     for i in range(0,iters):
         idx = findClosestCentroids(X,centroids)
         centroids = computeCentroids(X,idx,K)
-    return (idx,centroids);
+    return (idx,centroids)
 
 def findClosestCentroids(X, centroids):
     (k,d) = centroids.shape

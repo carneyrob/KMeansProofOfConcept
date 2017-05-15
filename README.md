@@ -14,4 +14,6 @@ IDEAS:
 
 Multithreading POC script included, still in progress
 
+Mapping not going well, might try square dividing and threading
+
 
